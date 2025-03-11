@@ -1,0 +1,38 @@
+
+app:
+  datasource:
+    jdbc-url: jdbc:tc:yugabyte:2.16.0.0-b90:///yugabyte
+    username: yugabyte
+    password: yugabyte
+    driver-class: com.yugabyte.Driver
+  key-prefix: ${KEY_PREFIX:}
+  spring-data-source-password-prefix: ${SPRING_DATASOURCE_PASSWORD_PREFIX:}
+  spring-data-source-password-version: ${SPRING_DATASOURCE_PASSWORD_METADATA_VALUE:1}
+  spring-data-source-password-metadata: ${SPRING_DATASOURCE_PASSWORD_METADATA_KEY:version_id}
+
+spring:
+  profiles:
+    active: ${SPRING_PROFILE:default}
+  datasource:
+    url: jdbc:tc:yugabyte:2.16.0.0-b90:///yugabyte
+    username: yugabyte
+    password: yugabyte
+    driver-class-name: com.yugabyte.Driver
+    hikari:
+      maximumPoolSize: ${DATASOURCE_MAXIMUM_POOL_SIZE:10}
+  flyway:
+    schemas: ${DATASOURCE_SCHEMA:hdfc_stand_in_adapter}
+    defaultSchema: hdfc_stand_in_adapter
+    sql-migration-prefix: V
+    baseline-on-migrate: true
+    baselineOnMigrate: true
+
+
+flyway:
+  url: jdbc:tc:yugabyte:2.16.0.0-b90:///yugabyte
+  schemas: il
+  user: yugabyte
+  password: yugabyte
+  locations: filesystem:db/migration
+  baselineVersion: 1.0
+  baselineDescription: Base Migration

@@ -1,0 +1,68 @@
+server:
+  port: 8080
+#app:
+#  datasource:
+#    jdbc-url: jdbc:${DATABASE_DRIVER:yugabytedb}://${DATABASE_HOST:localhost}:${DATABASE_PORT:5433}/${DATABASE_NAME:yugabyte}
+#    username: ${DATABASE_USERNAME:yugabyte}
+#    driver-class: com.yugabyte.Driver
+#    type: com.zaxxer.hikari.HikariDataSource
+#  key-prefix: ${KEY_PREFIX:}
+#  spring-data-source-password-prefix: ${SPRING_DATASOURCE_PASSWORD_PREFIX:}
+#  spring-data-source-password-version: ${SPRING_DATASOURCE_PASSWORD_METADATA_VALUE:1}
+#  spring-data-source-password-metadata: ${SPRING_DATASOURCE_PASSWORD_METADATA_KEY:version_id}
+
+spring:
+  profiles:
+    active: ${SPRING_PROFILE:default}
+  datasource:
+    url: "jdbc:${DATABASE_DRIVER:yugabytedb}://${DATABASE_HOST:localhost}:${DATABASE_PORT:5433}/${DATABASE_NAME:yugabyte}"
+    driver-class-name: com.yugabyte.Driver
+    username: ${DATABASE_USERNAME:yugabyte}
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maximumPoolSize: ${DATASOURCE_MAXIMUM_POOL_SIZE:10}
+      data-source-properties:
+        ssl: ${DATABASE_SSL:false}
+        sslmode: ${DATABASE_SSL_MODE:disable}
+        sslrootcert: ${DATABASE_SSL_ROOT_CERT:}
+  flyway:
+    sql-migration-prefix: V
+    baseline-on-migrate: true
+    baselineOnMigrate: true
+    schemas: ${DATASOURCE_SCHEMA:hdfc_limit_manager_adapter}
+    defaultSchema: hdfc_limit_manager_adapter
+
+
+flyway:
+#  url: jdbc:${DATABASE_DRIVER:yugabytedb}://${DATABASE_HOST:localhost}:${DATABASE_PORT:5433}/${DATABASE_NAME:yugabyte}
+#  schemas: ${DATASOURCE_SCHEMA:il_dev}
+#  user: ${DATASOURCE_USERNAME:yugabyte}
+#  password: ${DATASOURCE_PASSWORD:yugabyte}
+  locations: filesystem:db/migration
+  baselineVersion: 1.0
+  baselineDescription: Base Migration
+
+
+dapr:
+  initWaitDuration: 25000
+
+sidecar:
+  provider: dapr
+secretStore:
+  connector:
+    name: ${SECRETSTORE_CONNECTOR_NAME:local}
+  provider: ${SECRETSTORE_PROVIDER:gcp-secret-manager}   #secretStore.provider gets ignored if secretStore.connector is local
+  initWaitDuration: 25000
+  keyPrefix: ${KEY_PREFIX:}${SPRING_DATASOURCE_PASSWORD_PREFIX:}
+  keys:
+    - name: spring.datasource.password
+      metadata:
+        - key: ${SPRING_DATASOURCE_PASSWORD_METADATA_KEY:version_id}
+          value: ${SPRING_DATASOURCE_PASSWORD_METADATA_VALUE:1}
+
+---
+# dev profile
+spring:
+  config:
+    activate:
+      on-profile: dev
