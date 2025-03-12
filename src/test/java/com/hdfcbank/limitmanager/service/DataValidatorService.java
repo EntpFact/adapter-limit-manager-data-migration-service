@@ -14,7 +14,7 @@ import java.util.Map;
 @Service
 public class DataValidatorService {
 
-    private static final String GET_VERSION_QUERY="select version,script from hdfc_stand_in_adapter.flyway_schema_history fsh order by installed_rank desc limit 1";
+    private static final String GET_VERSION_QUERY="select version,script from hdfc_limit_manager_adapter.flyway_schema_history fsh order by installed_rank desc limit 1";
 
     private static final String VERSION_FIELD="version";
 

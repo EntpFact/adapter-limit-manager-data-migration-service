@@ -21,8 +21,8 @@ spring:
     hikari:
       maximumPoolSize: ${DATASOURCE_MAXIMUM_POOL_SIZE:10}
   flyway:
-    schemas: ${DATASOURCE_SCHEMA:hdfc_stand_in_adapter}
-    defaultSchema: hdfc_stand_in_adapter
+    schemas: ${DATASOURCE_SCHEMA:hdfc_limit_manager_adapter}
+    defaultSchema: hdfc_limit_manager_adapter
     sql-migration-prefix: V
     baseline-on-migrate: true
     baselineOnMigrate: true

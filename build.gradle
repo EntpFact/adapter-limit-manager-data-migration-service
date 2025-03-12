@@ -9,7 +9,7 @@ plugins {
 
 group 'com.hdfcbank.limitmanager'
 version '0.0.1-SNAPSHOT'
-archivesBaseName = 'shikhar-limit-manager-data-migration-service'
+archivesBaseName = 'shikhar-limit-manager-adapter-data-migration-service'
 
 java {
     sourceCompatibility = '21'
@@ -59,7 +59,7 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             groupId 'com.hdfcbank.limitmanager'
-            artifactId 'shikhar-limit-manager-data-migration-service'
+            artifactId 'shikhar-limit-manager-adapter-data-migration-service'
             version '0.0.1-SNAPSHOT'
             from components.java
             versionMapping {

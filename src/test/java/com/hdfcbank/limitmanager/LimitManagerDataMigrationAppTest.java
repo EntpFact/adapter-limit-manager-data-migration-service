@@ -13,7 +13,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 @Testcontainers
 @SpringBootTest
-public class StandInDataMigrationAppTest {
+public class LimitManagerDataMigrationAppTest {
 
 
     @Container

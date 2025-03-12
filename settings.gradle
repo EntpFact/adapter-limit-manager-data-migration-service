@@ -1,4 +1,4 @@
-rootProject.name = 'shikhar-limit-manager-limitmanager-data-migration-service'
+rootProject.name = 'shikhar-limit-manager-adapter-data-migration-service'
 
 dependencyResolutionManagement {
     repositories {
