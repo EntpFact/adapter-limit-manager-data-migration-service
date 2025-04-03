@@ -37,6 +37,16 @@ let acctID = [for (.debitDetails.accountDetailsList) .value if (.accountDetailTy
 
   }
 }','
+ let errorCode = string(.status.errorCode)
+ let errorDescription = .status.replyText
+ if($errorCode != "0")
+      {
+          "type" : "limitManagerUpdateDetails",
+          "errorCode": $errorCode,
+          "errorDescription": $errorDescription,
+          "transactionStatus": "FAILURE"
+      }
+ else
 let externalReferenceNo = .status.externalReferenceNo
 let limitManagerRefNo = .responseString.limitManagerRefNo
 let txnStatus =.responseString.txnStatus
@@ -111,6 +121,16 @@ let accountNumber = [for (.debitDetails.accountDetailsList) .value if (.accountD
     }
   }
 }', '
+ let errorCode = string(.status.errorCode)
+ let errorDescription = .status.replyText
+ if($errorCode != "0")
+      {
+          "type" : "limitManagerBlockDetails",
+          "errorCode": $errorCode,
+          "errorDescription": $errorDescription,
+          "transactionStatus": "FAILURE"
+      }
+ else
 let externalReferenceNo = .status.externalReferenceNo
 let limitManagerRefNo = .responseString.limitManagerRefNo
 let txnStatus = .responseString.txnStatus
